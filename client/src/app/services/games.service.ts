@@ -19,8 +19,8 @@ export class GamesService {
     return this.http.get<GameData>(`${environment.apiURL}games/${id}`, {responseType: 'json'});
   }
 
-  deleteGame(id: string): Observable<GameData>{
-    return this.http.delete<GameData>(`${environment.apiURL}games/${id}`, {responseType: 'json'});
+  deleteGame(id: string): Observable<GameDataResponse>{
+    return this.http.delete<GameDataResponse>(`${environment.apiURL}games/${id}`, {responseType: 'json'});
   }
 
   saveGame(newGame: GameDataResponse["data"]): Observable<GameDataResponse>{

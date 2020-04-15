@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { GamesService } from '../../services/games.service';
-import { GameData, Game } from '../../models/game';
+import { GameData, Game, GameDataResponse } from '../../models/game';
 
 @Component({
   selector: 'app-game-list',
@@ -28,4 +28,12 @@ export class GameListComponent implements OnInit {
 
   }
 
+  deleteGame(id: string){
+    console.log(id);
+    this.gamesServices.deleteGame(id).subscribe((res: GameDataResponse) => {
+      if(res.success == 1){
+       return window.location.reload()
+      }
+    }, (err) => {console.log(err)})
+  }
 }
