@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { GamesService } from '../../services/games.service';
 import { GameData, Game } from '../../models/game';
 
@@ -8,6 +8,8 @@ import { GameData, Game } from '../../models/game';
   styleUrls: ['./game-list.component.scss']
 })
 export class GameListComponent implements OnInit {
+
+  @HostBinding('class') classes = 'row';
 
   dataReceived: GameData;
   games: Game[];

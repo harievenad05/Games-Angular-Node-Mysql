@@ -16,7 +16,8 @@ export class GameFormComponent implements OnInit {
   game: Game = {
     title: '',
     description: '',
-    image: ''
+    image: '',
+    created_at: new Date()
   };
 
   constructor(private gameService: GamesService) { }
@@ -25,6 +26,7 @@ export class GameFormComponent implements OnInit {
   }
 
   saveNewGame(){
+    delete this.game.created_at;
     this.gameService.saveGame(this.game).subscribe((res: GameDataResponse) => {
       console.log(res)
       this.resetForm();

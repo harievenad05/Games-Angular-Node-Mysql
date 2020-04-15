@@ -6,7 +6,7 @@
                   <input type="text" name="title" [(ngModel)]="game.title" placeholder="Title" class="form-control" autofocus style="border-radius: 4px;">
                 </div>
                 <div class="form-group">
-                  <textarea name="description" [(ngModel)]="game.description" rows="3" placeholder="Description" class="form-control" style="border-radius: 4px;"></textarea>
+                  <textarea name="description" [(ngModel)]="game.description" rows="4" placeholder="Description" class="form-control" style="border-radius: 4px;"></textarea>
                 </div>
                 <div class="form-group">
                   <input type="url" name="image" [(ngModel)]="game.image" placeholder="Image Url" class="form-control" style="border-radius: 4px;">
@@ -15,5 +15,14 @@
               </form>
         </div>
     </div>
+</div>
+
+<div class="col-md-4">
+  <div class="card card-body text-center">
+  <img [src]="game.image == '' ? '/assets/noimage.png' : game.image" alt="No Image" class="card-img-top" >
+    <h3>{{game.title == '' ? 'Game Title' : game.title}}</h3>
+    <p>{{game.description == '' ? 'Write your Descrition' : game.description}}</p>
+    <p>{{game.created_at | date: 'yyyy-MM-dd'}}</p>
+  </div>
 </div>
 
