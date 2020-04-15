@@ -16,7 +16,7 @@ const database_1 = __importDefault(require("../database"));
 class GamesController {
     getAllGames(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('SELECT * from games', (err, result, field) => {
+            yield database_1.default.query('SELECT * FROM games', (err, result, field) => {
                 if (err)
                     throw err;
                 res.status(200).json({ success: 1, message: 'success', data: result });
@@ -25,8 +25,19 @@ class GamesController {
     }
     ;
     getGameById(req, res) {
-        database_1.default.query('DESCRIBE games');
-        res.status(200).json({ message: `games by ${req.params.id}` });
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('SELECT * FROM games WHERE id = ?', [id], (err, result, field) => {
+                if (err)
+                    throw err;
+                if (result.length > 0) {
+                    return res.status(200).json({ success: 1, message: 'success', data: result });
+                }
+                else {
+                    return res.status(403).json({ success: 0, message: 'No record found' });
+                }
+            });
+        });
     }
     ;
     createGames(req, res) {
@@ -34,17 +45,48 @@ class GamesController {
             yield database_1.default.query('INSERT INTO games set ?', [req.body], (err, result, field) => {
                 if (err)
                     throw err;
-                res.status(200).json({ success: 1, message: 'game created successfully' });
+                if (result.affectedRows > 0) {
+                    return res.status(200).json({ success: 1, message: 'game created successfully' });
+                }
+                else {
+                    return res.status(403).json({ success: 0, message: 'wrong params' });
+                }
             });
         });
     }
+    ;
     updateGames(req, res) {
-        res.status(200).json({ message: `Updating games ${req.params.id}` });
+        return __awaiter(this, void 0, void 0, function* () {
+            let sql = "UPDATE games SET title='" + req.body.title + "', description='" + req.body.description + "', image='" + req.body.image + "'  WHERE id=" + req.params.id;
+            yield database_1.default.query(sql, (err, result, field) => {
+                if (err)
+                    throw err;
+                if (result.affectedRows > 0) {
+                    return res.status(200).json({ success: 1, message: 'game updated successfully' });
+                }
+                else {
+                    return res.status(403).json({ success: 0, message: 'No record found' });
+                }
+            });
+        });
     }
+    ;
     deleteGames(req, res) {
-        const id = req.params.id;
-        res.status(200).json({ message: `${id} Deleting games` });
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('DELETE FROM games WHERE id = ?', [id], (err, result, field) => {
+                if (err)
+                    throw err;
+                if (result.affectedRows > 0) {
+                    return res.status(200).json({ success: 1, message: 'game deleted successfully' });
+                }
+                else {
+                    return res.status(403).json({ success: 0, message: 'No record found' });
+                }
+            });
+        });
     }
+    ;
 }
 ;
 const gamesController = new GamesController();
