@@ -27,7 +27,7 @@ class GamesController {
   };
 
   public async createGames(req: Request, res: Response): Promise<void> {
-
+    // console.log(req.body)
     await pool.query('INSERT INTO games set ?', [req.body], (err, result, field) => {
       if (err) throw err;
       if(result.affectedRows > 0){

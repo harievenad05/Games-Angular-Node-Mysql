@@ -42,6 +42,7 @@ class GamesController {
     ;
     createGames(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            // console.log(req.body)
             yield database_1.default.query('INSERT INTO games set ?', [req.body], (err, result, field) => {
                 if (err)
                     throw err;
