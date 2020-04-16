@@ -5,6 +5,7 @@ Angular Game Application with CRUD functions
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Setup](#setup)
+* [Inspiration](#inspiration)
 
 ## General info
 Simple Angular Game Application  with Node, Express & Mysql
@@ -14,5 +15,7 @@ Simple Angular Game Application  with Node, Express & Mysql
 
 ## Setup
 
+## Inspiration
+[@FaztWeb](https://github.com/FaztWeb)
 
 ## Further help
