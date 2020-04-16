@@ -15,8 +15,8 @@ export class GamesService {
     return this.http.get<GameData>(`${environment.apiURL}games`, {responseType: 'json'});
   }
 
-  getGameById(id: string): Observable<GameData>{
-    return this.http.get<GameData>(`${environment.apiURL}games/${id}`, {responseType: 'json'});
+  getGameById(id: string): Observable<GameDataResponse>{
+    return this.http.get<GameDataResponse>(`${environment.apiURL}games/${id}`, {responseType: 'json'});
   }
 
   deleteGame(id: string): Observable<GameDataResponse>{
@@ -27,7 +27,7 @@ export class GamesService {
     return this.http.post<GameDataResponse>(`${environment.apiURL}games`, newGame, {responseType: 'json'});
   }
 
-  updateGame(id: string, updatedGame: GameDataResponse["data"]): Observable<GameDataResponse>{
+  updateGame(id: string, updatedGame: Game): Observable<GameDataResponse>{
     return this.http.put<GameDataResponse>(`${environment.apiURL}games/${id}`, updatedGame, {responseType: 'json'});
   }
 

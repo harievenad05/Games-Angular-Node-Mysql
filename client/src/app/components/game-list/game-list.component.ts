@@ -17,23 +17,25 @@ export class GameListComponent implements OnInit {
   constructor(private gamesServices: GamesService) { }
 
   ngOnInit(): void {
+    this.getGames();
+  };
+
+  getGames(){
     this.gamesServices.getAllGames().subscribe((res: GameData) => {
       this.dataReceived = res
       if(this.dataReceived.success == 0){
-        console.log('Not found')
+        console.log('Not found');
       }
-      this.games = this.dataReceived.data
-      console.log(this.games)
+      this.games = this.dataReceived.data;
     }, (err) => {console.log(err)})
-
-  }
+  };
 
   deleteGame(id: string){
     console.log(id);
     this.gamesServices.deleteGame(id).subscribe((res: GameDataResponse) => {
       if(res.success == 1){
-       return window.location.reload()
+       this.getGames();
       }
-    }, (err) => {console.log(err)})
-  }
+    }, (err) => {console.log(err)});
+  };
 }
